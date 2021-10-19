@@ -1,0 +1,21 @@
+.container {
+    padding: 10px;
+}
+.country {
+  grid-row: 3;
+  grid-column: 3 / 6;
+  text-align: center;
+  font-size: 16px;
+  align-items: center;
+  padding: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+img {
+  background-color: white;
+  height: 150px;
+}
+.loader {
+    width: 35%;
+    border-radius: 99%;
+  }

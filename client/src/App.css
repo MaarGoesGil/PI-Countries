@@ -1,5 +1,8 @@
-.App {
-  text-align: center;
+body {
+  text-align: center; 
+  background-image: url('./img/bolamundo.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .App-logo {
@@ -22,6 +25,14 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+button{
+  font-size: 25px;
+  padding: 10px;
+  border-radius: 18px;
+  color: rgb(243, 247, 38);
+  background-color: black;
 }
 
 .App-link {
