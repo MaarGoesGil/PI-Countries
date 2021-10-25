@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
-import { Route } from 'react-router-dom';
-// luego componentes a usar
+import { Route, NotFoundRoute } from 'react-router-dom';
+import Index from './components/Index/Index';
 import Home from './components/Home/Home';
-import Countries from './components/Countries/Countries';
 import Activity from './components/Activity/Activity'
-// Store --> import { connect } from 'react-redux';
+import Detalle from './components/Detalle/Detalle';
+import Errors from './components/Errors/Errors';
 
 
 function App() {
@@ -13,11 +13,17 @@ function App() {
   // --------------------------------
   return (
     <div className="App">
-      <Route exact path='/' render={() => <Home />} />
 
-      <Route path='/countries' render={() => <Countries />} />
+      <Route exact path='/' render={() => <Index />} />
 
-      <Route path='/activity' render={() => <Activity />} />
+      <Route exact path='/countries' render={() => <Home />} />
+      
+      <Route exact path='/activity' render={() => <Activity />} />
+
+      <Route exact path='/countries/:idPais' render={() => <Detalle />} />
+
+      
+       {/* <Route exact path='*' render={() => <Errors />} /> */}
     </div>
   );
 

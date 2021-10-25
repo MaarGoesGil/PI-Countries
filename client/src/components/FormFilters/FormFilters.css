@@ -1,0 +1,38 @@
+.form-filters{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;  
+    grid-template-rows: 1fr, auto;
+    padding: 1%;
+    margin-bottom: 10px;
+}
+.form-filters label{
+    font-size:20px;
+    color: hsl(66, 77%, 56%);
+    text-shadow: 2px 2px #748129;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    background-color:rgb(0, 0, 0);
+    text-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 8px;
+}
+
+.form-filters select{   
+    background-color:black;    
+    color: hsl(66, 77%, 56%);
+    text-shadow: 2px 2px #748129;
+    margin-top: 5px;
+    padding: 13px;
+    font-size: 15px;
+}
+
+.form-filters input{  
+    background-color:black;    
+    color: hsl(66, 77%, 56%);
+    text-shadow: 2px 2px #748129;
+    padding: 13px;
+    width: auto;
+    margin-left: 25px;
+    margin-top: 5px;
+}

@@ -13,24 +13,40 @@ Recibe los datos recolectados desde el formulario controlado de la ruta de creac
 Crea una actividad turística en la base de datos
 */
 router.post('/', async (req, res, next) => {
-    const { nombre, dificultad, duracion, temporada, idCountry } = req.body;
+    const { nombre, dificultad, duracion, temporada, paises } = req.body;
+    console.log(nombre, dificultad, duracion, temporada, paises )
     try {
         const newActivity = await Activity.create({
             id: uuidv4(),
-            nombre: 'buceo',             // 'buceo'
-            dificultad:5,         // 1,2,3,4,5 --> type of Num
-            duracion:'6hs',           // '2hs'
-            temporada:'Verano',        // 'verano'
+            nombre: nombre,             // 'buceo'
+            dificultad: dificultad,         // 1,2,3,4,5 --> type of Num
+            duracion:duracion,           // '2hs'
+            temporada: temporada,        // 'verano'
         });
-        const country = await Country.findOne({
-            where: {
-                id: 'ATA',
-            }
-        })
-         await country.addActivity(newActivity)
+
+        for (let index = 0; index < paises.length; index++) {            
+         await newActivity.addCountry(paises[index])       
+        }
         res.status(201).send(`Actividad {/* nombre.toUpperCase()} */} creada`)
     }
     catch (error) { next(error) }
 })
+ router.get('/', async (req, res, next) => {
+    try{
+        const actividades = await Activity.findAll({
+            include: [{
+                model: Country,
+                attributes: {
+                    exclude: ['createdAt', 'updateAt']
+                },
+                through:{
+                    attributes: []
+                }
+            }]
+        })
+        res.json(actividades);
+    }
+    catch (error) { next(error) }
+ })
 
 module.exports = router;

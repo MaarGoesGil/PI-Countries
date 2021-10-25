@@ -1,21 +1,71 @@
-body{
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center;    
+.All {
+  display: block;
 }
 
-.container{
-    display: adjust-content;
+.Title-LinkActivity {
+  display: flex;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-right: 2%;
+  margin-left: 2%;
+  position: sticky;
+  flex-wrap: wrap;
+  background-color: #ffffff42;
+}
+.Title-LinkActivity a {
+  text-decoration: none;
 }
 
-.home{
-    color: hsl(66, 77%, 56%);
-    background-color:rgba(255, 255, 255, 0.219);
-    font-size: 30px;
-    text-shadow: 5px 5px #000000;   
-    float: left;
-    padding: 10%;
-    border-radius:2em;
-    margin-top: 10%;
-    margin-bottom: 10%;
-    margin-left: 20px;
+.Title-LinkActivity button {
+  flex: 1 1 1;
+  margin-left: 4%;
+  margin-top: 6%;
+  font-size: 20px;
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  background-color: rgb(183, 194, 27);
+  color: black;
+  font-weight: bold;
+  text-shadow: 2px 2px #e4e714;
+  border-color: rgba(203, 206, 57, 0.781);
+  box-shadow: -4px -3px rgba(109, 110, 22, 0.781) inset;
+  cursor: pointer; /* cursor --> mano */
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.445);
+  box-shadow: 3px 2px black inset;
+  color: hsl(66, 77%, 56%);
+  text-shadow: 2px 2px black;
+}
+
+.title { 
+  flex: 1 1 auto;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 80px;
+  color: hsl(66, 77%, 56%);
+  text-shadow: 5px 5px #000000;
+  margin-top: 1%;
+}
+
+
+.Lista{
+  background-color:rgb(0, 0, 0);
+  border-radius: 40px;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.countries {
+  margin-top: 2%;
+  margin-bottom: 2px;
+}
+.containerLoader {
+  margin-top: 10%;
+  align-items: center;
+  display: block;
+}
+.loader {
+  width: 150px;
+  border-radius: 99%;
 }

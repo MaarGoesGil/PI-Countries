@@ -3,76 +3,78 @@ const { Router } = require('express');
 // Ejemplo: const authRouter = require('./auth.js');
 const axios = require('axios');
 const { Country, Activity } = require('../db');
+const { Op } = require("sequelize");
 
 const router = Router();
 
 /*[  ] GET /countries:
 En una primera instancia deberán traer todos los países desde restcountries y guardarlos en su propia base de datos y luego ya utilizarlos desde allí (Debe almacenar solo los datos necesarios para la ruta principal)
 Obtener un listado de los paises.*/
+
+
+
 router.get('/countries', async (req, res, next) => {
-    try {
-        const api = await axios.get(`https://restcountries.com/v3/all`);
-        const countries = api.data;
-        for (let i = 0; i < countries.length; i++) {
-            if (!await Country.findOne({
+
+    if (req.query.name) {
+        const { name } = req.query
+        try {
+            const paises = await Country.findAll({
                 where: {
-                    id: countries[i].cca3,
+                    nombre: { [Op.substring]: `%${name}%` },
                 }
-            })) {
-                await Country.create({
-                    id: countries[i].cca3,
-                    nombre: countries[i].name.common.toLowerCase(),
-                    img: countries[i].flags[1],
-                    continente: countries[i].continents[0],
-                    capital: countries[i].capital ? countries[i].capital[0] : 'no tiene',
-                    subregion: countries[i].subregion || 'no tiene',
-                    area: countries[i].area,
-                    poblacion: countries[i].population
-                })
-            };
-        } var paises = await Country.findAll({ include: Activity });
-        res.send(paises);
+            }
+            );
+            paises ? res.send(paises) : res.status(404).send('Error pais no encontrado');
+        }
+        catch (error) { next(error) }
+    } else {
+        try {
+            const api = await axios.get(`https://restcountries.com/v3/all`);
+            const countries = api.data;
+            for (let i = 0; i < countries.length; i++) {
+                if (!await Country.findOne({
+                    where: {
+                        id: countries[i].cca3,
+                    }
+                })) {
+                    await Country.create({
+                        id: countries[i].cca3,
+                        nombre: countries[i].name.common.toLowerCase(),
+                        img: countries[i].flags[1],
+                        continente: countries[i].continents[0],
+                        capital: countries[i].capital ? countries[i].capital[0] : 'no tiene',
+                        subregion: countries[i].subregion || 'no tiene',
+                        area: countries[i].area,
+                        poblacion: countries[i].population
+                    })
+                };
+            } var paises = await Country.findAll({ include: Activity });
+            res.send(paises);
+        }
+        catch (err) { next(err) }
     }
-    catch (err) { next(err) }
 })
 
-/*[ ] GET /countries/{idPais}:
-Obtener el detalle de un país en particular
-Debe traer solo los datos pedidos en la ruta de detalle de país
-Incluir los datos de las actividades turísticas correspondientes*/
 
 router.get('/countries/:idPais', async (req, res, next) => {
     try {
         const { idPais } = req.params;
-        const pais = await Country.findOne({
+        const pais = await Country.findAll({
+            include: [{
+                model: Activity,
+                attributes: {
+                    exclude: ['createdAt', 'updateAt']
+                },
+                through: {
+                    attributes: []
+                }
+            }],
             where: {
                 id: idPais.toUpperCase()
             }
         });
-        pais ? res.send(pais) : res.status(404).send('Error');
+        pais ? res.send(pais) : res.status(404).send('Error pais no encontrado');
     }
     catch (error) { next(error) }
 })
-
-/*[ ] GET /countries aca arranca query--> ?name="...":
-Obtener los países que coincidan con el nombre pasado como query parameter (No necesariamente tiene que ser una matcheo exacto)
-Si no existe ningún país mostrar un mensaje adecuado */
-const { Op } = require("sequelize");
-
-router.get(`/countries`, async (req, res, next) => {
-    try {
-        const { name } = req.query;
-        const pais = await Country.findAll({
-            where: {
-                nombre: {
-                    [Op.substring]: name.toLowerCase(),
-                }
-            }
-        });
-        pais ? res.send(pais) : res.status(404).send('El pais no existe');
-    }
-    catch (error) { next(error) }
-})
-
-
 module.exports = router;

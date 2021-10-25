@@ -1,0 +1,63 @@
+.Formulario{
+    display: block;
+    text-align: center;
+    background-color: rgba(240, 255, 32, 0.911);
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border-radius: 10px;
+};
+
+form {
+    padding: 10px;
+    display: block;
+}
+.form-div{
+    background-color: rgba(255, 255, 255, 0.616);
+    border-radius: 10px;
+}
+
+label{
+    display: inline-block;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.checkDiv{     
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 1%;
+    margin-bottom: 5%;
+    font-size: 20px;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr ;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+}
+.checkbox{
+    text-align: left;
+    padding: 8px;
+    background-color: rgb(0, 0, 0);
+    color:rgb(221, 221, 44);
+    border-color: rgb(221, 221, 44);
+    border-radius: 8px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.danger{
+    display:inline;
+    color:red;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: rgba(228, 135, 135, 0.192);
+}
+
+button{
+    margin-bottom: 2%;
+}

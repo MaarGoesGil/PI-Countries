@@ -1,25 +1,13 @@
-.container {
-  background-color: rgba(255, 255, 255, 0.397);
+.grid{      
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 1%;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
+    grid-template-rows: 1fr 1fr ;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
 }
-.title {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 40px;
-  color: black;
-  text-align: center;
-  width: 5px;
-}
-.countries {
-  margin-top: 14px;
-  margin-bottom: 14px;
-  display: grid;
-  grid-template-columns: 2fr 2fr 2fr;
-  grid-template-rows: auto;
-}
-.containerLoader{
-  align-items: center;
-  display: inline-block;
-}
-.loader {
-  width: 35%;
-  border-radius: 99%;
+.botonPaginado{
+    margin-block-start: 2%;
 }

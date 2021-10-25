@@ -1,0 +1,9 @@
+ .ErrorContainer{
+    display: inline-block;
+    font-size: 50px;
+    color:rgb(204, 204, 35);
+}
+.ErrorContainer {
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.425);
+} 
