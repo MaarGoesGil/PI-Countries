@@ -16,8 +16,6 @@ __Ruta de creación de actividad turística__: debe contener
 
 function Activity({ paises, init }) {
 
-    const [alert, setAlert ]= useState('');
-    
   //------ Carga Paises de la Base de datos -------------
 
   useEffect(() => {
@@ -78,16 +76,10 @@ function Activity({ paises, init }) {
 
   // ------------ Funcion para el eleccion de paises -------------------------
 
-  function handleClickP() {
-    var arrayPaises = document.getElementsByClassName('checkbox');
-    for (let i = 0; i < arrayPaises.length; i++) {
-      if(arrayPaises[i].checked === false){
-        setInputs({ ...inputs, paises: paises.filter(e=> e!== arrayPaises[i].name) }) 
-      }
-      if(arrayPaises[i].checked === true){
-        setInputs({ ...inputs, paises: paises.push(arrayPaises[i].name) }) 
-      }
-    }
+  function handleClickP(e) {
+    e.preventDefault();
+    if (e.target.checked === true) { inputs.paises.push(e.target.value) };
+    if (e.target.checked === false) { let filtrado = inputs.paises.filter(p => p !== e.target.value); setInputs({ ...inputs, paises: filtrado }) };
   }
 
   // -------------- Funcion para el Cambio de inputs -------------------------
@@ -115,9 +107,9 @@ function Activity({ paises, init }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    handleClickP();
+
     if (inputs.paises.length === 0) {
-     setAlert('Debe Seleccionar algun pais para dicha actividad');
+      alert('Debe Seleccionar algun pais para dicha actividad' )
     }
     if( errors === {
       'nombre': '',
@@ -155,17 +147,17 @@ function Activity({ paises, init }) {
       for (let i = 0; i < a.length; i++) {
         a[i].checked = false
       }
-      setAlert('');
+
       alert('Actividad agregada')
     }
     
-    setAlert('Complete todos los campos');
+    alert('Complete todos los campos')
 
   }
 
   return (
 
-    <FormActivity alert={alert} paises={paises} handleSubmit={handleSubmit} handleChange={handleChange} handleDuracion={handleDuracion} inputs={inputs} concat={concat} errors={errors} />
+    <FormActivity paises={paises} handleSubmit={handleSubmit} handleChange={handleChange} handleDuracion={handleDuracion} handleClickP={handleClickP} inputs={inputs} concat={concat} errors={errors} />
 
   )
 }
