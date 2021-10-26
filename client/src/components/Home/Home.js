@@ -19,7 +19,7 @@ function Home({ paises, paisesFilter, init }) {
   
   if (paises === null) {
     return (<div className="containerLoader">
-      <img className="loader" src={loader} alt={'icon loader'} />
+      <img className="loadeer" src={loader} alt={'icon loader'} />
     </div>)
   }
   else {

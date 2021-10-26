@@ -13,6 +13,7 @@
 form {
     padding: 10px;
     display: block;
+    align-items: center;
 }
 .form-div{
     background-color: rgba(255, 255, 255, 0.616);
@@ -23,8 +24,8 @@ label{
     display: inline-block;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 20px;
-    margin-left: 2%;
-    margin-right: 2%;
+    margin-left: 4px;
+    margin-right: 4px;
     margin-top: 2%;
     margin-bottom: 2%;
 }
@@ -49,6 +50,22 @@ label{
     border-radius: 8px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+.loaderDiv{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    backdrop-filter: blur(4px);
+}
+.loader{
+    margin-top: 25%;
+    margin-left: 45%;
+    display: block;
+    position: absolute;
+    border-radius: 9999px;
+}
 
 .danger{
     display:inline;
@@ -60,4 +77,8 @@ label{
 
 button{
     margin-bottom: 2%;
+}
+
+.checkbox:hover{
+    background-color: grey;
 }

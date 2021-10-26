@@ -61,11 +61,18 @@ button:hover {
   margin-bottom: 2px;
 }
 .containerLoader {
-  margin-top: 10%;
-  align-items: center;
-  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  backdrop-filter: blur(4px);
 }
-.loader {
-  width: 150px;
-  border-radius: 99%;
+.loadeer {
+  margin-top: 25%;
+  margin-left: 45%;
+  display: block;
+  position: absolute;
+  border-radius: 9999px;
 }

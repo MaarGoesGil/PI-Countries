@@ -17,12 +17,15 @@ function Filters({activities, filter_AZ, filter_ZA, filter_CONTINENTE, filter_PO
 
     function filtrado(e) {
         e.preventDefault();
-        if (e.target.name === 'continente') { setFilter('continente');filter_CONTINENTE(e.target.value);  }
+        if (e.target.name === 'continente') { 
+            if(e.target.value === 'API'){setFilter('API'); filter_AZ();}
+            setFilter('continente');filter_CONTINENTE(e.target.value);  }
         if (e.target.value === 'A-Z') { setFilter('a - z');filter_AZ();  }
         if (e.target.value === 'Z-A') { setFilter('z-a');filter_ZA();  }
         if (e.target.value === 'filterPoblMay') { setFilter('pobla+');filter_POBLACION_MAYOR();  }
         if (e.target.value === 'filterPoblMen') { setFilter('pob-');filter_POBLACION_MENOR();  }
         if (activities?.includes(e.target.value)) { setFilter('actividad') ;filter_ACTIVIDAD(e.target.value);  }
+        if(e.target.value === 'API') { setFilter('API');filter_AZ();  }
     }
 
     return (

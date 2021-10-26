@@ -1,6 +1,7 @@
 import React from 'react';
 import './FormActivity.css';
 import {Link} from 'react-router-dom';
+import loader from '../../img/loader.gif'
 
 export default function FormActivity({paises, errors, handleSubmit, handleChange, handleDuracion, handleClickP, inputs, concat}) {
     
@@ -45,18 +46,20 @@ export default function FormActivity({paises, errors, handleSubmit, handleChange
                 </div>
                 <div className='filtradosIndiv'>
                     <label >Seleccione el/los paises para dicha actividad:</label>
-                    
                     <div className='checkDiv'>
+                        {paises ? '': <div className='loaderDiv'><img className='loader' src={loader}/></div>}
                     {
                         paises?.map((p) => {
                             return (<div key={'buttonSelectPais' + p.id} className='checkbox'>
 
-                                <input  type='checkbox' id={'iPaises' + p.id} name={p.nombre} value={p.id} onChange={(e) => { handleClickP(e) }} /> {p.nombre}  </div>)
+                                <input  type='checkbox' id={'iPaises' + p.id} name={p.nombre} value={p.id} /> <label for={'iPaises' + p.id} >{p.nombre}</label>  </div>)
                         })
                     } 
                     
                     </div>
                 </div>
+
+                {alert.length>1 ? <p className='danger'>{alert}</p> :''}
 
                 <button type="submit">Agregar</button>
 

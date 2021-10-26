@@ -10,6 +10,7 @@ function FormFilters({ activities, filtrado }) {
         <div>
           <label id='iContinente'> Continente: </label>
           <select id='iContinente' defaultValue='API' name='continente' onChange={(e) => filtrado(e)} >
+            <option value='API' > Todos </option>
             <option value='Africa' > Africa </option>
             <option value='Antarctica' > Antarctica </option>
             <option value='Asia' > Asia </option>
@@ -22,7 +23,8 @@ function FormFilters({ activities, filtrado }) {
         
         <div>
           <label id='idActivity'> Actividad Turistica: </label>
-          <select id='idActivity' onChange={(e) => filtrado(e)} >
+          <select id='idActivity' onChange={(e) => filtrado(e)} >            
+          <option value='API' > Todos </option>
             {activities.map((act, i) => { return <option key={i + 'activ.'} value={act} > {act} </option> })}
           </select>
         </div>
@@ -30,6 +32,8 @@ function FormFilters({ activities, filtrado }) {
         <div>
           <label id='idAlfa' > Orden Alfabetico: </label>
           <select id='idAlfa' name='Alfa' onChange={(e) => filtrado(e)} >
+            
+            <option value='API' > Todos </option>
             <option value='A-Z' > A-Z </option>
             <option value='Z-A' > Z-A </option>
           </select>
@@ -37,7 +41,8 @@ function FormFilters({ activities, filtrado }) {
 
         <div>
           <label id='idPoblacion'> Poblacion: </label>
-          <select id='idPoblacion' name='Poblacion' onChange={(e) => filtrado(e)} >
+          <select id='idPoblacion' name='Poblacion' onChange={(e) => filtrado(e)} >            
+            <option value='API' > Todos </option>
             <option value='filterPoblMay' > Mayor </option>
             <option value='filterPoblMen' > Menor </option>
           </select>
