@@ -55,7 +55,7 @@ export default function FormActivity({paises, errors, handleSubmit, handleChange
                         paises?.map((p) => {
                             return (<div key={'buttonSelectPais' + p.id} className='checkbox'>
 
-                                <input  type='checkbox' id={'iPaises' + p.id} className='checkk' name={p.nombre} value={p.id}  onClick={handleClickP}/> <label for={'iPaises' + p.id}> {p.nombre} </label>  </div>)
+                                <input  type='checkbox' id={'iPaises' + p.id} className='checkk' name={p.nombre} value={p.id}  onClick={handleClickP}/> <label name={'iPaises' + p.id}> {p.nombre} </label>  </div>)
                         })
                     } 
                     

@@ -23,7 +23,20 @@ function paises(state = initialState, action) {
       return { ...state, paisDetallado: action.payload }
 
     case 'FILTER_AZ':
-      let newfilter = state.filter.sort(function (a, b) {
+      if(state.filter.length < 1){
+        let newfilter = state.paisesDB.sort(function (a, b) {
+          if (a.nombre > b.nombre) {
+            return 1;
+          }
+          if (a.nombre < b.nombre) {
+            return -1;
+          }
+          return 0;
+        });
+        return { ...state, filter: newfilter }
+      }
+      else{
+        let newfilter = state.filter.sort(function (a, b) {
         if (a.nombre > b.nombre) {
           return 1;
         }
@@ -33,9 +46,23 @@ function paises(state = initialState, action) {
         return 0;
       });
       return { ...state, filter: newfilter }
+    }
 
     case 'FILTER_ZA':
-      return {
+      if(state.filter.length < 1){
+        return {
+        ...state, filter: state.paisesDB.sort(function (a, b) {
+          if (a.nombre < b.nombre) {
+            return 1;
+          }
+          if (a.nombre > b.nombre) {
+            return -1;
+          }
+          return 0;
+        })
+      }}
+      else{
+        return {
         ...state, filter: state.filter.sort(function (a, b) {
           if (a.nombre < b.nombre) {
             return 1;
@@ -45,7 +72,7 @@ function paises(state = initialState, action) {
           }
           return 0;
         })
-      }
+      }}
 
     case 'FILTER_CONTINENTE':
       if (action.payload === 'API') {
@@ -70,7 +97,19 @@ function paises(state = initialState, action) {
 
     case 'FILTER_POBLACION_MENOR':
       //return state.sort();
-      return {
+      if(state.filter.length < 1){
+        return {
+        ...state, filter: state.paisesDB.sort(function (a, b) {
+          if (a.poblacion > b.poblacion) {
+            return 1;
+          }
+          if (a.poblacion < b.poblacion) {
+            return -1;
+          }
+          return 0;
+        })
+      }}
+      else{return {
         ...state, filter: state.filter.sort(function (a, b) {
           if (a.poblacion > b.poblacion) {
             return 1;
@@ -80,10 +119,22 @@ function paises(state = initialState, action) {
           }
           return 0;
         })
-      }
+      }}
 
     case 'FILTER_POBLACION_MAYOR':
+      if(state.filter.length < 1){
       return {
+      ...state, filter: state.paisesDB.sort(function (a, b) {
+        if (a.poblacion < b.poblacion) {
+          return 1;
+        }
+        if (a.poblacion > b.poblacion) {
+          return -1;
+        }
+        return 0;
+      })
+    }}
+      else{return {
         ...state, filter: state.filter.sort(function (a, b) {
           if (a.poblacion < b.poblacion) {
             return 1;
@@ -93,7 +144,7 @@ function paises(state = initialState, action) {
           }
           return 0;
         })
-      }
+      }}
 
     case 'SEARCH':
       return { ...state, filter: action.payload }

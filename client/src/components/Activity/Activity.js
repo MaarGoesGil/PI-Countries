@@ -91,6 +91,7 @@ function Activity({ paises, init }) {
       let filtrado = inputs.paises.filter(p => p !== e.target.value)
       setInputs({ ...inputs, paises: filtrado });
     };
+    setInputs({...inputs, duracion: concat.horas + ' hs ' + concat.minutos + ' min '});
   }
 
   // -------------- Funcion para el Cambio de inputs -------------------------
@@ -114,7 +115,6 @@ function Activity({ paises, init }) {
 
 
   async function handleSubmit(e) {
-    setInputs({...inputs, duracion: concat.horas + ' hs ' + concat.minutos + ' min '});
     if ((inputs.nombre === '' ||
       inputs.temporada === '' ||
       inputs.dificultad === '' ||
