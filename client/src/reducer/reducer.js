@@ -16,14 +16,14 @@ function paises(state = initialState, action) {
     case 'load_Activity':
       let nombres = action.payload.map((e) => { return e.nombre })
       let data = new Set(nombres);
-      let activitiesName = [...data];      
+      let activitiesName = [...data];
       return { ...state, activities: activitiesName }
 
     case 'PAIS_DETALLADO':
       return { ...state, paisDetallado: action.payload }
 
     case 'FILTER_AZ':
-      let newfilter = state.paisesDB.sort(function (a, b) {
+      let newfilter = state.filter.sort(function (a, b) {
         if (a.nombre > b.nombre) {
           return 1;
         }
@@ -36,7 +36,7 @@ function paises(state = initialState, action) {
 
     case 'FILTER_ZA':
       return {
-        ...state, filter: state.paisesDB.sort(function (a, b) {
+        ...state, filter: state.filter.sort(function (a, b) {
           if (a.nombre < b.nombre) {
             return 1;
           }
@@ -48,10 +48,16 @@ function paises(state = initialState, action) {
       }
 
     case 'FILTER_CONTINENTE':
-      return { ...state, filter: state.paisesDB.filter(p => { return p.continente === action.payload }) }
+      if (action.payload === 'API') {
+        return {...state, filter: state.paisesDB }
+      }
+      else {
+        return {...state, filter: state.paisesDB.filter(p => {
+          return p.continente === action.payload }) }
+      }
 
     case 'FILTER_ACTIVIDAD':
-      let filterPaises = []; 
+      let filterPaises = [];
       state.paisesDB.map(p => {
         for (var i = 0; i < p.activities.length; i++) {
           if (p.activities[i].nombre === action.payload) {
@@ -59,13 +65,13 @@ function paises(state = initialState, action) {
           }
         } return false;
       });
-      console.log('filterPaises',filterPaises)
+      console.log('filterPaises', filterPaises)
       return { ...state, filter: filterPaises }
 
     case 'FILTER_POBLACION_MENOR':
       //return state.sort();
       return {
-        ...state, filter: state.paisesDB.sort(function (a, b) {
+        ...state, filter: state.filter.sort(function (a, b) {
           if (a.poblacion > b.poblacion) {
             return 1;
           }
@@ -78,7 +84,7 @@ function paises(state = initialState, action) {
 
     case 'FILTER_POBLACION_MAYOR':
       return {
-        ...state, filter: state.paisesDB.sort(function (a, b) {
+        ...state, filter: state.filter.sort(function (a, b) {
           if (a.poblacion < b.poblacion) {
             return 1;
           }
