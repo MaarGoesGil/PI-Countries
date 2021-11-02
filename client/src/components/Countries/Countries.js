@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Country from '../Country/Country';
 import './Countries.css';
+import flag from '../../img/bandera.png';
 
 
 export default function Countries({ paises }) {
-
     useEffect(() => {
-        setPaises(paises)},[paises])
+        setPaises(paises)
+    }, [paises])
 
     const [paisesp, setPaises]= useState(paises)
     var start = 0; 
@@ -32,14 +33,37 @@ export default function Countries({ paises }) {
 
     return (
         <div className="container-grid">
-            <div className="grid">
-                { 
-                    paisesp.slice(0,10).map(e=> {
+
+
+{/*  --------- No hay paises -------  */}
+
+        { paises.length < 1 && <div className='NotCountries'>
+            <h1>No se encontraron paises</h1>
+            <img src={flag} alt='NotCountries'/>
+        </div>
+
+        }
+           
+
+{/*  --------- Paises filtrados -------  */}
+        <div className="grid">
+                {
+                paisesp.length > 0 && paisesp.slice(0,10).map(e=> {
                                 return <Country key={e.id + 'filter'} pais={e} />
-                    })
+                    }) 
+                }
+                
+{/*  --------- Primeros 10 paises -------  */}
+
+                { 
+                paisesp.length < 0 && paises.slice(0,10).map(e=> {
+                        return <Country key={e.id + 'filter'} pais={e} /> })
                 }
                 
             </div>
+            
+{/*  --------- Paginado de paises -------  */}
+
             {array?.map((e,i)=>{return (<button className='botonPaginado' key={'paginado'+ i} name={i} onClick={paginado}> {i+1} </button>) }) }
         </div>
     )

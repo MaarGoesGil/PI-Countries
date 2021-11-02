@@ -15,7 +15,7 @@ function Nav({setFilter, search}) {
     }
     return (
         <>
-            <input type="search" className="inputSearch" placeholder="Buscar por pais..."
+            <input type="search" className="inputSearch" placeholder="Buscar pais..."
             onChange={handleChange} onClick={onclick} />
                 <img className='icono-Nav' src={icon} alt='iconoNav'/>
         </>

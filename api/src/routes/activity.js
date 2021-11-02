@@ -14,7 +14,6 @@ Crea una actividad turística en la base de datos
 */
 router.post('/', async (req, res, next) => {
     const { nombre, dificultad, duracion, temporada, paises } = req.body;
-    console.log(nombre, dificultad, duracion, temporada, paises )
     try {
         const newActivity = await Activity.create({
             id: uuidv4(),
@@ -27,7 +26,7 @@ router.post('/', async (req, res, next) => {
         for (let index = 0; index < paises.length; index++) {            
          await newActivity.addCountry(paises[index])       
         }
-        res.status(201).send(`Actividad {/* nombre.toUpperCase()} */} creada`)
+        res.status(201).send(`Actividad creada`)
     }
     catch (error) { next(error) }
 })
@@ -37,12 +36,12 @@ router.post('/', async (req, res, next) => {
             include: [{
                 model: Country,
                 attributes: {
-                    exclude: ['createdAt', 'updateAt']
-                },
-                through:{
-                    attributes: []
+                    exclude: ['createdAt', 'updatedAt']
                 }
-            }]
+            }],
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            }
         })
         res.json(actividades);
     }

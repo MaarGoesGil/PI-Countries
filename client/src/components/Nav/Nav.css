@@ -1,12 +1,20 @@
 
 .inputSearch {
   flex: 1 1 1;
-  background-color: black;
+  font-family: "Courier New", Courier, monospace;
+  background-color: rgba(255, 255, 255, 0.561);
   color: yellow;
   height: 40px;
   border-radius: 20px;
   padding: 3px;
   margin-top: 2%;
+  -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+  text-shadow: 2px 2px black;
+  font-size: 28px;
+  font-weight: bold;
+  border-color: rgb(255, 255, 255);
+  box-shadow: -4px -3px rgba(20, 20, 20, 0.781) inset;
+  cursor: pointer; /* cursor --> mano */
 }
 .icono-Nav {
   margin-top: 2%;
@@ -15,6 +23,7 @@
   border-radius: 18px;
   margin-right: 2%;
 }
+
 .inputSearch::placeholder {
   color: yellow;
 }

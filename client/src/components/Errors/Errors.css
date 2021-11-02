@@ -1,9 +1,16 @@
  .ErrorContainer{
-    display: inline-block;
+    display: flexbox;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: 30%;
+    margin-right: 30%;
+    text-align: center;
+    border-radius: 20px;
     font-size: 50px;
     color:rgb(204, 204, 35);
-}
-.ErrorContainer {
     padding: 30px;
     background-color: rgba(255, 255, 255, 0.425);
-} 
+    backdrop-filter: blur(4px);
+}

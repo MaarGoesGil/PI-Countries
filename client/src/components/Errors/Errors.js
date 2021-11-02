@@ -5,10 +5,12 @@ import './Errors.css';
 export default function Errors(){
     return (
         <div className="ErrorContainer">
-            <h1>Pagina no encontrada</h1>
-            <Link to="/">
-            <button>Home</button>
-            </Link>
+            <div>
+                <h1 className="title">Pagina no encontrada</h1>
+                <Link to="/">
+                    <button>Home</button>
+                </Link>
+            </div>
         </div>
     )
 }

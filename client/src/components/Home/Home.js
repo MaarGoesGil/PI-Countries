@@ -15,7 +15,7 @@ function Home({ paises, paisesFilter, init }) {
   useEffect(() => {
     //llamado a api
     init();
-  }, [])
+  },[])
   
   if (paises === null) {
     return (<div className="containerLoader">

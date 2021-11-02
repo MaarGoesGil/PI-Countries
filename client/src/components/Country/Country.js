@@ -3,11 +3,22 @@ import { Link } from 'react-router-dom';
 import './Country.css';
 
 export default function Country({ pais }) {
-   
-    return (
+    if (!pais){
+        return (        
+            <div className="country">
+                <div className="country-id">
+                    <h1>No se encontro el pais</h1>
+                </div>
+            </div>
+            )
+    }
+    else {
+        return (
+
         <Link to={`/countries/${pais.id}`} key={'LinkToId' + pais.id}>
             <div className="country">
-                    <h1>{pais.nombre.toUpperCase()}</h1>
+            <div className="country-id">
+                    <h1>{pais?.nombre.toUpperCase()}</h1>
                     <h3>Continente: {pais.continente}</h3>
                     {pais.img ?
                         <div className="container-img">
@@ -18,8 +29,10 @@ export default function Country({ pais }) {
                             <img src={`../images/loader.gif`} alt='Loader' />
                         </div>
                     }
+                </div>
             </div>
-        </Link>
-    )
+        </Link> 
+
+    )}
 }
 

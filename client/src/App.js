@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, NotFoundRoute } from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Index from './components/Index/Index';
 import Home from './components/Home/Home';
 import Activity from './components/Activity/Activity'
@@ -13,17 +13,22 @@ function App() {
   // --------------------------------
   return (
     <div className="App">
+      <Router>
+        <Switch>
 
-      <Route exact path='/' render={() => <Index />} />
+          <Route exact path='/' render={() => <Index />} />
 
-      <Route exact path='/countries' render={() => <Home />} />
+          <Route exact path='/countries' render={() => <Home />} />
+          
+          <Route exact path='/activity' render={() => <Activity />} />
+
+          <Route exact path='/countries/:idPais' render={() => <Detalle />} />
       
-      <Route exact path='/activity' render={() => <Activity />} />
+          <Route path='*' render={() => <Errors />}/>
 
-      <Route exact path='/countries/:idPais' render={() => <Detalle />} />
+        </Switch>
+      </Router>
 
-      
-       {/* <Route exact path='*' render={() => <Errors />} /> */}
     </div>
   );
 

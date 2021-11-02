@@ -7,7 +7,7 @@ export const FILTER_POBLACION_MENOR = 'FILTER_POBLACION_MENOR';
 export const SEARCH = 'SEARCH';
 export const INIT = 'INIT';
 export const PAIS_DETALLADO = 'PAIS_DETALLADO';
-export const load_Activity = 'loadActivity'
+export const load_Activity = 'load_Activity'
 
 export const init = () => {
     return async (dispatch) => {
@@ -16,7 +16,7 @@ export const init = () => {
             const res = await api.json()
             return dispatch({
                 type: INIT,
-                payload: res, 
+                payload: res
             })
         }
         catch (error) { console.log(error) }
@@ -30,7 +30,7 @@ export const idPaisDetallado = (idPais) => {
             const res = await api.json()
             return dispatch({
                 type: PAIS_DETALLADO,
-                payload: res, 
+                payload: res
             })
         }
         catch (error) { console.log(error) }
@@ -43,8 +43,9 @@ export const loadActivity = () => {
             const api = await fetch('http://localhost:3001/activity')
             const res = await api.json()
             return dispatch({
-                type: load_Activity,
-                payload: res, 
+                type: load_Activity,n:
+                console.log('actiu',res),
+                payload: res
             })
         }
         catch (error) { console.log(error) }

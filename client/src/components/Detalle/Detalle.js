@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { idPaisDetallado } from '../../actions/actions';
 import { useParams } from 'react-router-dom';
 import bandera from '../../img/bandera.png';
+import {Link} from 'react-router-dom';
 
 /* [ ] Los campos mostrados en la ruta principal para cada país (imagen de la bandera, nombre, código de país de 3 letras y continente)
 [ ] Código de país de 3 letras (id)
@@ -19,14 +20,14 @@ function Detalle({ paisDetallado, idPaisDetallado }) {
 
     useEffect(() => {
         idPaisDetallado(idPais)
-    }, [])
-    console.log(paisDetallado[0], 'paisDetall')
+    },[])
+
     const pais = paisDetallado[0]
     return (
         <div className="paisDetallado">
             {
                 pais ?
-                    <div>   {pais.img ?
+                    <div className='pais'>   {pais.img ?
                         <div>
                             <img src={pais.img} alt={`Bandera de ${pais.nombre}`} />
                         </div>
@@ -37,22 +38,22 @@ function Detalle({ paisDetallado, idPaisDetallado }) {
                     }
 
                         <div>
-                            <h1>{pais.nombre.toUpperCase()}</h1>
-                            <h4>Cca3: {pais.id}</h4>
-                            <h3>Continente : {pais.continente}</h3>
-                            <h4>Capital : {pais.capital}</h4>
-                            <p>Subregion : {pais.subregion}</p>
-                            <p>Area : {pais.area / 1000000} km2</p>
-                            <p>Poblacion : {pais.poblacion}</p>
-                            <h3>Actividades</h3>
+                            <h1 className="title">{pais.nombre.toUpperCase()}</h1>
+                            <h4>CCA3: {pais.id}</h4>
+                            <h3>CONTINENTE : {pais.continente}</h3>
+                            <h4>CAPITAL : {pais.capital}</h4>
+                            <p>SUBREGION : {pais.subregion}</p>
+                            <p>AREA : {pais.area / 1000000} km2</p>
+                            <p>POBLACION : {pais.poblacion}</p>
+                            <h3 className="title">ACTIVIDADES</h3>
                             <div className='actividadesDetalle'>
                             {pais.activities.length > 0 ? pais.activities?.map((e, i) => {
                                 return (
-                                    <div>
-                                        <h3 key={i + 'actividades del pais'}>{e.nombre}</h3>
-                                        <p>dificultad: {e.dificultad}</p>
-                                        <p>duracion: {e.duracion}</p>
-                                        <p>temporada: {e.temporada}</p>
+                                    <div key={i + 'actividades del pais'}>
+                                        <h3 >{e.nombre.toUpperCase()}</h3>
+                                        <p>DIFICULTAD: {e.dificultad}</p>
+                                        <p>DURACION: {e.duracion}</p>
+                                        <p>TEMPORADA: {e.temporada}</p>
                                     </div>)
                             }) :''}
                               </div>  
@@ -68,7 +69,11 @@ function Detalle({ paisDetallado, idPaisDetallado }) {
                             Pais no encontrado
                         </h1>
                     </div>
-            }
+                    }
+            <Link to="/countries">
+                <button>Home</button>
+            </Link> 
+            
         </div>
     )
 }

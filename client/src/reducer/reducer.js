@@ -13,14 +13,14 @@ function paises(state = initialState, action) {
     case 'INIT':
       return { ...state, paisesDB: action.payload }
 
-    case 'loadActivity':
-      let nombres = action.payload.map((e)=>{return e.nombre})
+    case 'load_Activity':
+      let nombres = action.payload.map((e) => { return e.nombre })
       let data = new Set(nombres);
-      let activitiesName = [...data];
+      let activitiesName = [...data];      
       return { ...state, activities: activitiesName }
 
     case 'PAIS_DETALLADO':
-        return { ...state, paisDetallado: action.payload }
+      return { ...state, paisDetallado: action.payload }
 
     case 'FILTER_AZ':
       let newfilter = state.paisesDB.sort(function (a, b) {
@@ -51,13 +51,16 @@ function paises(state = initialState, action) {
       return { ...state, filter: state.paisesDB.filter(p => { return p.continente === action.payload }) }
 
     case 'FILTER_ACTIVIDAD':
-        const filterPaises = state.paisesDB.filter(p => {
-          for(var i = 0; i < p.activities.length; i++) {
-          if(p.activities[i].nombre===action.payload){return true}
-          return false          
+      let filterPaises = []; 
+      state.paisesDB.map(p => {
+        for (var i = 0; i < p.activities.length; i++) {
+          if (p.activities[i].nombre === action.payload) {
+            filterPaises.push(p)
           }
-        });
-      return { ...state, filter: filterPaises}
+        } return false;
+      });
+      console.log('filterPaises',filterPaises)
+      return { ...state, filter: filterPaises }
 
     case 'FILTER_POBLACION_MENOR':
       //return state.sort();

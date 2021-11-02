@@ -15,10 +15,24 @@ Obtener un listado de los paises.*/
 
 router.get('/countries', async (req, res, next) => {
 
+// --------------- Query ------------
+
     if (req.query.name) {
         const { name } = req.query
         try {
             const paises = await Country.findAll({
+                include: [{
+                model: Activity,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                },
+                through: {
+                    attributes: []
+                }
+                 }],
+                 attributes: {
+                     exclude: ['createdAt', 'updatedAt']
+                 },
                 where: {
                     nombre: { [Op.substring]: `%${name}%` },
                 }
@@ -27,7 +41,10 @@ router.get('/countries', async (req, res, next) => {
             paises ? res.send(paises) : res.status(404).send('Error pais no encontrado');
         }
         catch (error) { next(error) }
-    } else {
+    } 
+// ------------------------ Llamado a la API Countries ------------
+
+    else {
         try {
             const api = await axios.get(`https://restcountries.com/v3/all`);
             const countries = api.data;
@@ -48,7 +65,16 @@ router.get('/countries', async (req, res, next) => {
                         poblacion: countries[i].population
                     })
                 };
-            } var paises = await Country.findAll({ include: Activity });
+            }
+            var paises = await Country.findAll({
+                include: [{
+                    model: Activity,
+                    exclude: ['createdAt', 'updatedAt']                    
+                }],
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                },
+            });
             res.send(paises);
         }
         catch (err) { next(err) }
@@ -63,12 +89,15 @@ router.get('/countries/:idPais', async (req, res, next) => {
             include: [{
                 model: Activity,
                 attributes: {
-                    exclude: ['createdAt', 'updateAt']
+                    exclude: ['createdAt', 'updatedAt']
                 },
                 through: {
                     attributes: []
                 }
             }],
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            },
             where: {
                 id: idPais.toUpperCase()
             }

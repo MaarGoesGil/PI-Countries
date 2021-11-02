@@ -11,12 +11,12 @@ __Ruta de creación de actividad turística__: debe contener
   - Duración
   - Temporada
 - [ ] Posibilidad de seleccionar/agregar varios países en simultaneo
-- [ ] Botón/Opción para crear una nueva actividad turística
- */
+- [ ] Botón/Opción para crear una nueva actividad turística */
+
 
 function Activity({ paises, init }) {
 
-  //------ Carga Paises de la Base de datos -------------
+  // ------ Carga Paises de la Base de datos -------------
 
   useEffect(() => {
     init()
@@ -25,7 +25,7 @@ function Activity({ paises, init }) {
   // --------------------- Estados ----------------------
 
   const [concat, setConcat] = useState({
-    horas: '', minutos: ''
+    horas: 0, minutos: 0
   });
   const [inputs, setInputs] = useState({
     nombre: '',
@@ -55,31 +55,42 @@ function Activity({ paises, init }) {
     }
     if (e.target.name === 'dificultad') {
       if (e.target.value.length < 1 || e.target.value > 5) {
-        setErrors({ ...errors, dificultad: 'Debe ingresar un valor entre 1 - 5' })
+        setErrors({ ...errors, dificultad: 'Debe ingresar un valor entre 1 - 5' });
       }
       else { setErrors({ ...errors, dificultad: '' }) }
     }
 
+    // --------- Inputs de Horas y minutos ---------------
+
     if (e.target.name === 'horas') {
-      if (e.target.value > 23 || e.target.value < 0) {
-        setErrors({ ...errors, horas: 'Debe ingresar un valor menor que 24 y mayor a 00' })
+      if (e.target.value.length < 1 || e.target.value > 23 || e.target.value < 0) {
+        setErrors({ ...errors, horas: 'Debe ingresar un valor menor de 24 y mayor a 00' });
       }
       else { setErrors({ ...errors, horas: '' }) }
     }
     if (e.target.name === 'minutos') {
       if (e.target.value >= 60 || e.target.value < 0) {
-        setErrors({ ...errors, minutos: 'Debe ingresar un valor menor que 60 y mayor a 00' })
+        setErrors({ ...errors, minutos: 'Debe ingresar un valor menor de 60 y mayor a 00' })
       }
-      else { setErrors({ ...errors, minutos: '' }) }
-    }
+      else if(parseInt(e.target.value) === 0 && parseInt(concat.horas) === 0){
+        setErrors({ ...errors, minutos: 'Debe ingresar un horario para la actividad' })
+      }
+      else { setErrors({ ...errors, minutos: '' })  }
+    };
+
   }
 
-  // ------------ Funcion para el eleccion de paises -------------------------
+  // ------------ Funcion para eleccion de paises -------------------------
 
   function handleClickP(e) {
-    e.preventDefault();
-    if (e.target.checked === true) { inputs.paises.push(e.target.value) };
-    if (e.target.checked === false) { let filtrado = inputs.paises.filter(p => p !== e.target.value); setInputs({ ...inputs, paises: filtrado }) };
+    if (e.target.checked === true) {
+      inputs.paises.push(e.target.value)
+      setInputs({ ...inputs })
+    }
+    else {
+      let filtrado = inputs.paises.filter(p => p !== e.target.value)
+      setInputs({ ...inputs, paises: filtrado });
+    };
   }
 
   // -------------- Funcion para el Cambio de inputs -------------------------
@@ -93,30 +104,27 @@ function Activity({ paises, init }) {
   // ------------- Funcion para la Duracion de Actividad ----------------------
 
 
-  function handleDuracion(e) {
-    handleErrors(e)
-    setConcat({ ...concat, [e.target.name]: e.target.value })
-    let horas = Object.values(concat);
-    horas = horas[0] + 'hs' + horas[1] + 'min';
-    setInputs({ ...inputs, duracion: horas })
+  function handleDuracion(e) {  
+      setConcat({ ...concat, [e.target.name]: e.target.value });       
+      handleErrors(e);
   }
-
 
   // ------------ Submit del Formulario ----------------------
 
 
-  async function handleSubmit(e) {
-    e.preventDefault();
 
-    if (inputs.paises.length === 0) {
-      alert('Debe Seleccionar algun pais para dicha actividad' )
+  async function handleSubmit(e) {
+    setInputs({...inputs, duracion: concat.horas + ' hs ' + concat.minutos + ' min '});
+    if ((inputs.nombre === '' ||
+      inputs.temporada === '' ||
+      inputs.dificultad === '' ||
+      inputs.duracion === ''
+    ) || inputs.paises.length < 1) {
+      alert('Complete todos los campos')
+      e.preventDefault()
     }
-    if( errors === {
-      'nombre': '',
-      'dificultad': '',
-      'horas': '',
-      'minutos': ''
-    }){
+    else {      
+      e.preventDefault();
 
       await fetch("http://localhost:3001/activity", {
         method: "POST",
@@ -143,16 +151,13 @@ function Activity({ paises, init }) {
         minutos: ''
       })
 
-      const a = document.getElementsByClassName('checkbox');
+      const a = document.getElementsByClassName('checkk');
       for (let i = 0; i < a.length; i++) {
         a[i].checked = false
       }
 
       alert('Actividad agregada')
     }
-    
-    alert('Complete todos los campos')
-
   }
 
   return (
