@@ -43,8 +43,7 @@ export const loadActivity = () => {
             const api = await fetch('http://localhost:3001/activity')
             const res = await api.json()
             return dispatch({
-                type: load_Activity,n:
-                console.log('actiu',res),
+                type: load_Activity,
                 payload: res
             })
         }
