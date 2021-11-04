@@ -7,9 +7,11 @@ const activity = require('./routes/activity.js');
 require('./db.js'); // lo que se va a usar con Postgres
 
 const server = express();
+const cors = require('cors')
 
 server.name = 'API';
 
+server.use(cors())
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));
 server.use(express.json({ limit: '50mb' }));
 server.use(cookieParser());

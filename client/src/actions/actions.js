@@ -1,3 +1,4 @@
+import axios from 'axios';
 export const FILTER_AZ = 'FILTER_AZ';
 export const FILTER_ZA = 'FILTER_ZA';
 export const FILTER_CONTINENTE = 'FILTER_CONTINENTE';
@@ -12,8 +13,8 @@ export const load_Activity = 'load_Activity'
 export const init = () => {
     return async (dispatch) => {
         try {
-            const api = await fetch('http://localhost:3001/countries')
-            const res = await api.json()
+            const api = await axios.get('/countries')
+            const res = await api.data
             return dispatch({
                 type: INIT,
                 payload: res
@@ -26,8 +27,8 @@ export const init = () => {
 export const idPaisDetallado = (idPais) => {
     return async (dispatch) => {
         try {
-            const api = await fetch(`http://localhost:3001/countries/${idPais}`)
-            const res = await api.json()
+            const api = await axios.get(`/countries/${idPais}`)
+            const res = await api.data
             return dispatch({
                 type: PAIS_DETALLADO,
                 payload: res
@@ -40,8 +41,8 @@ export const idPaisDetallado = (idPais) => {
 export const loadActivity = () => {
     return async (dispatch) => {
         try {
-            const api = await fetch('http://localhost:3001/activity')
-            const res = await api.json()
+            const api = await axios.get('/activity')
+            const res = await api.data
             return dispatch({
                 type: load_Activity,
                 payload: res
@@ -54,8 +55,8 @@ export const loadActivity = () => {
 export const search = (data) => {
     return async (dispatch) => {
         try {
-            const api = await fetch(`http://localhost:3001/countries?name=${data}`)
-            const res = await api.json()
+            const api = await axios.get(`/countries?name=${data}`)
+            const res = await api.data
             return dispatch({
                 type: SEARCH,
                 payload: res, 

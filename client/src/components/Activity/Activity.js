@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import { init } from '../../actions/actions';
 import FormActivity from '../FormActivity/FormActivity';
+import axios from 'axios';
 
 /* 
 __Ruta de creación de actividad turística__: debe contener
@@ -125,17 +126,11 @@ function Activity({ paises, init }) {
     }
     else {      
       e.preventDefault();
-
-      await fetch("http://localhost:3001/activity", {
-        method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inputs),
-      })
-        .then(r => r.json())
-        .catch(error => { return (error) });
+      try{
+        await axios.post("/activity", inputs)
+        alert('Actividad creada con exito')
+      }   
+      catch(error){ console.log(error) };
 
       //------------- Seteos --------------
       setInputs({
@@ -156,7 +151,6 @@ function Activity({ paises, init }) {
         a[i].checked = false
       }
 
-      alert('Actividad agregada')
     }
   }
 
