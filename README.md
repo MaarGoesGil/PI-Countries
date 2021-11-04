@@ -72,3 +72,4 @@ __Ruta de creación de actividad turística__:
 - [ ] Posibilidad de seleccionar/agregar varios países en simultaneo
 - [ ] Posibilidad de crear una nueva actividad turística y de redireccionamiento al Home
 
+# WS-COUNTRIES
