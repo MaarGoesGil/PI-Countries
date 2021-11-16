@@ -10,7 +10,7 @@ function paises(state = initialState, action) {
 
   switch (action.type) {
 
-    case 'INIT':
+    case 'INIT': console.log(state.paisesDB)
       return { ...state, paisesDB: action.payload }
 
     case 'load_Activity':
